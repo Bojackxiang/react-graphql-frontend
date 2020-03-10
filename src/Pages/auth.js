@@ -5,12 +5,15 @@ const Auth = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const formSubmit = async event => {
     event.preventDefault();
+
     const requestBody = {
       query: `
-                mutation{createUser(userInput: {email: "useremail", password: "111111"}){
-                    email
-                    password
-                }}
+            mutation{
+              createUser(userInput: {email: "${form.email}", password: "${form.password}"}){
+                email
+               password
+              }
+          }
             `
     };
 
@@ -23,7 +26,6 @@ const Auth = () => {
         console.log(e);
       });
   };
-
 
   const inputChange = event => {
     setForm({ ...form, [event.target.name]: event.target.value });
